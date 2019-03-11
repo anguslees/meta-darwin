@@ -19,8 +19,10 @@ do_compile_prepend_darwinsdk() {
 }
 
 do_install_prepend_darwinsdk() {
+    set +e
     ( cd ${B}/${TARGET_SYS}/libgcc; oe_runmake 'DESTDIR=${D}' install-unwind_h-forbuild install-unwind_h ) || true
     oe_runmake 'DESTDIR=${D}' install-host || true
+    set -e
 }
 
 # Remove -rpath-link and -rpath
